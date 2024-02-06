@@ -3,8 +3,8 @@
 #define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 
 float player_y, player_dp, enemy_y, enemy_dp = 0;
-float player_x = 80;
 float enemy_x = -80;
+float player_x = 80;
 float arena_half_size_x = 85, arena_half_size_y = 45;
 float player_half_size_x = 2, player_half_size_y = 12;
 float ball_p_x, ball_p_y, ball_dp_x = 50, ball_dp_y, ball_half_size = 1;
