@@ -120,24 +120,24 @@ simulate_game(Input* input, float dt) {
 					ball_dp_y = 0;
 					ball_p_x = 0;
 					ball_p_y = 0;
-					player_score++;
+					enemy_score++;
 				}
 				else if (ball_p_x - ball_half_size < -arena_half_size_x) {
 					ball_dp_x *= -1;
 					ball_dp_y = 0;
 					ball_p_x = 0;
 					ball_p_y = 0;
-					enemy_score++;
+					player_score++;
 				}
 			}
 
-			draw_number(player_score, -9, 43, text_size, color_score);
-			draw_number(enemy_score, 6, 43, text_size, color_score);
+			draw_number(enemy_score, -9, 43, text_size, color_score);
+			draw_number(player_score, 6, 43, text_size, color_score);
 
 			draw_rect(ball_p_x, ball_p_y, ball_half_size, ball_half_size, color_white);
 
-			draw_rect(player_x, player_y, player_half_size_x, player_half_size_y, color_white);
 			draw_rect(enemy_x, enemy_y, player_half_size_x, player_half_size_y, color_white);
+			draw_rect(player_x, player_y, player_half_size_x, player_half_size_y, color_white);
 		}
 		else if (current_gamemode == GM_SETTINGS) {
 			if (pressed(BUTTON_UP) || pressed(BUTTON_W)) {
