@@ -2,14 +2,34 @@
 #define pressed(b) (input->buttons[b].is_down && input->buttons[b].changed)
 #define released(b) (!input->buttons[b].is_down && input->buttons[b].changed)
 
-float player_y, player_dp, enemy_y, enemy_dp = 0;
 float enemy_x = -80;
 float player_x = 80;
 float arena_half_size_x = 85, arena_half_size_y = 45;
 float player_half_size_x = 2, player_half_size_y = 12;
-float ball_p_x, ball_p_y, ball_dp_x = 50, ball_dp_y, ball_half_size = 1;
+float ball_half_size = 1;
 
 float text_size = 1.f;
+
+enum Gamemode {
+	GM_MENU,
+	GM_SETTINGS,
+	GM_GAMEPLAY
+};
+
+Gamemode current_gamemode;
+int hot_button;
+int selected_settings;
+bool is_paused = false;
+bool enemy_is_ai;
+
+float ai_base_speed = 333.3f;
+int difficulty = 2;
+
+float ball_base_speed = 50.f;
+int ball_speed_modifier = 2;
+
+float player_y, player_dp, enemy_y, enemy_dp;
+float ball_p_x, ball_p_y, ball_dp_x = ball_base_speed, ball_dp_y;
 
 int player_score, enemy_score;
 
@@ -38,23 +58,13 @@ aabb_vs_aabb(float p1x, float p1y, float hs1x, float hs1y, float p2x, float p2y,
 		p1y + hs1y < p2y + hs2y);
 }
 
-enum Gamemode {
-	GM_MENU,
-	GM_SETTINGS,
-	GM_GAMEPLAY
-};
-
-Gamemode current_gamemode;
-int hot_button;
-int selected_settings;
-bool is_paused = false;
-bool enemy_is_ai;
-
-int ai_base_speed = 333;
-int difficulty = 2;
-
-int ball_base_speed = 50;
-int ball_speed_modifier = 2;
+internal void
+reset_game() {
+	current_gamemode = GM_MENU;
+	player_y = player_dp = enemy_y = enemy_dp = 0;
+	ball_p_x = ball_p_y = ball_dp_y = 0;
+	player_score = enemy_score = 0;
+}
 
 internal void
 simulate_game(Input* input, float dt) {
@@ -64,7 +74,7 @@ simulate_game(Input* input, float dt) {
 		draw_arena_borders(arena_half_size_x, arena_half_size_y, color_borders);
 
 		if (pressed(BUTTON_ESCAPE)) {
-			current_gamemode = GM_MENU;
+			reset_game();
 		}
 
 		if (current_gamemode == GM_GAMEPLAY) {
