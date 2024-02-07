@@ -23,9 +23,9 @@ u32 color_arena = 0xffaa33;
 u32 color_borders = 0xff6611;
 u32 color_score = 0xcceecc;
 u32 color_text = 0xffff11;
-u32 color_text_unfocused = 0xffffaa;
+u32 color_text_unfocused = 0xffff99;
 u32 color_button = 0xff1111;
-u32 color_button_unfocused = 0xffaaaa;
+u32 color_button_unfocused = 0xff9999;
 
 const char* char_1[5] = {
 	"  0",
