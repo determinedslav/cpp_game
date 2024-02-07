@@ -17,7 +17,7 @@ enum Gamemode {
 };
 
 Gamemode current_gamemode;
-int hot_button;
+int selected_players;
 int selected_settings;
 bool is_paused = false;
 bool enemy_is_ai;
@@ -194,21 +194,21 @@ simulate_game(Input* input, float dt) {
 		}
 		else {
 			if (pressed(BUTTON_LEFT) || pressed(BUTTON_RIGHT) || pressed(BUTTON_A) || pressed(BUTTON_D)) {
-				hot_button = !hot_button;
+				selected_players = !selected_players;
 			}
 
 			if (pressed(BUTTON_ENTER)) {
 				current_gamemode = GM_SETTINGS;
-				enemy_is_ai = hot_button ? 0 : 1;
+				enemy_is_ai = selected_players ? 0 : 1;
 			}
 
-			draw_rect(-20, 0, 10, 10, hot_button ? color_button_unfocused : color_button);
-			draw_text(char_1, -23, 2, text_size, hot_button ? color_text_unfocused : color_text);
-			draw_text(char_p, -19, 2, text_size, hot_button ? color_text_unfocused : color_text);
+			draw_rect(-20, 0, 10, 10, selected_players ? color_button_unfocused : color_button);
+			draw_text(char_1, -23, 2, text_size, selected_players ? color_text_unfocused : color_text);
+			draw_text(char_p, -19, 2, text_size, selected_players ? color_text_unfocused : color_text);
 
-			draw_rect(20, 0, 10, 10, hot_button ? color_button : color_button_unfocused);
-			draw_text(char_2, 17, 2, text_size, hot_button ? color_text : color_text_unfocused);
-			draw_text(char_p, 21, 2, text_size, hot_button ? color_text : color_text_unfocused);
+			draw_rect(20, 0, 10, 10, selected_players ? color_button : color_button_unfocused);
+			draw_text(char_2, 17, 2, text_size, selected_players ? color_text : color_text_unfocused);
+			draw_text(char_p, 21, 2, text_size, selected_players ? color_text : color_text_unfocused);
 		}
 	} else {
 		draw_rect(-4, 0, 2, 6, 0xff5500);
