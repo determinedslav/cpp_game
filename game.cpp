@@ -70,7 +70,6 @@ internal void
 simulate_game(Input* input, float dt) {
 	if (!is_paused) {
 		draw_rect(0, 0, arena_half_size_x, arena_half_size_y, color_arena);
-		draw_rect(0, 0, 1, arena_half_size_y, 0xcceecc);
 		draw_arena_borders(arena_half_size_x, arena_half_size_y, color_borders);
 
 		if (pressed(BUTTON_ESCAPE)) {
@@ -141,6 +140,7 @@ simulate_game(Input* input, float dt) {
 				}
 			}
 
+			draw_rect(0, 0, 1, arena_half_size_y, color_score);
 			draw_number(enemy_score, -9, 43, text_size, color_score);
 			draw_number(player_score, 6, 43, text_size, color_score);
 
