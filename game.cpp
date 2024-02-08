@@ -176,6 +176,7 @@ simulate_game(Input* input, float dt) {
 				current_gamemode = GM_GAMEPLAY;
 			}
 
+			draw_text(text_ai_level, -59, 18, text_size, color_text);
 			if (!selected_settings) {
 				draw_rect(-45, -10, 15, 20, color_borders);
 			}
@@ -183,6 +184,7 @@ simulate_game(Input* input, float dt) {
 			draw_rect(-45, -10, 10, 4, difficulty > 1 ? color_button : color_button_unfocused);
 			draw_rect(-45, -20, 10, 4, difficulty > 0 ? color_button : color_button_unfocused);
 
+			draw_text(text_ball_speed, 27, 18, text_size, color_text);
 			if (selected_settings) {
 				draw_rect(45, -10, 15, 20, color_borders);
 			}
@@ -203,12 +205,10 @@ simulate_game(Input* input, float dt) {
 			}
 
 			draw_rect(-20, 0, 10, 10, selected_players ? color_button_unfocused : color_button);
-			draw_text(char_1, -23, 2, text_size, selected_players ? color_text_unfocused : color_text);
-			draw_text(char_p, -19, 2, text_size, selected_players ? color_text_unfocused : color_text);
+			draw_text(text_1_player, -23, 2, text_size, selected_players ? color_text_unfocused : color_text);
 
 			draw_rect(20, 0, 10, 10, selected_players ? color_button : color_button_unfocused);
-			draw_text(char_2, 17, 2, text_size, selected_players ? color_text : color_text_unfocused);
-			draw_text(char_p, 21, 2, text_size, selected_players ? color_text : color_text_unfocused);
+			draw_text(text_2_player, 17, 2, text_size, selected_players ? color_text : color_text_unfocused);
 		}
 	} else {
 		draw_rect(-4, 0, 2, 6, 0xff5500);
