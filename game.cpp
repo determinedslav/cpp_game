@@ -151,19 +151,19 @@ simulate_game(Input* input, float dt) {
 		}
 		else if (current_gamemode == GM_SETTINGS) {
 			if (pressed(BUTTON_UP) || pressed(BUTTON_W)) {
-				if (!selected_settings && (difficulty < 3)) {
+				if ((!selected_settings && enemy_is_ai) && (difficulty < 3)) {
 					difficulty++;
 				}
-				else if (selected_settings && (ball_speed_modifier < 3)) {
+				else if ((selected_settings || !enemy_is_ai) && (ball_speed_modifier < 3)) {
 					ball_speed_modifier++;
 				}
 			}
 
 			if (pressed(BUTTON_DOWN) || pressed(BUTTON_S)) {
-				if (!selected_settings && (difficulty > 0)) {
+				if ((!selected_settings && enemy_is_ai) && (difficulty > 0)) {
 					difficulty--;
 				}
-				else if (selected_settings && (ball_speed_modifier > 1)) {
+				else if ((selected_settings || !enemy_is_ai) && (ball_speed_modifier > 1)) {
 					ball_speed_modifier--;
 				}
 			}
@@ -176,16 +176,18 @@ simulate_game(Input* input, float dt) {
 				current_gamemode = GM_GAMEPLAY;
 			}
 
-			draw_text(text_ai_level, -59, 18, text_size, color_text);
-			if (!selected_settings) {
-				draw_rect(-45, -10, 15, 20, color_borders);
+			if (enemy_is_ai) {
+				draw_text(text_ai_level, -59, 18, text_size, color_text);
+				if (!selected_settings) {
+					draw_rect(-45, -10, 15, 20, color_borders);
+				}
+				draw_rect(-45, 0, 10, 4, difficulty > 2 ? color_button : color_button_unfocused);
+				draw_rect(-45, -10, 10, 4, difficulty > 1 ? color_button : color_button_unfocused);
+				draw_rect(-45, -20, 10, 4, difficulty > 0 ? color_button : color_button_unfocused);
 			}
-			draw_rect(-45, 0, 10, 4, difficulty > 2 ? color_button : color_button_unfocused);
-			draw_rect(-45, -10, 10, 4, difficulty > 1 ? color_button : color_button_unfocused);
-			draw_rect(-45, -20, 10, 4, difficulty > 0 ? color_button : color_button_unfocused);
 
 			draw_text(text_ball_speed, 27, 18, text_size, color_text);
-			if (selected_settings) {
+			if (selected_settings || !enemy_is_ai) {
 				draw_rect(45, -10, 15, 20, color_borders);
 			}
 			draw_rect(45, 0, 10, 4, ball_speed_modifier > 2 ? color_button : color_button_unfocused);
