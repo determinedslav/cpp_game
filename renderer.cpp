@@ -147,3 +147,16 @@ draw_number(int number, float x, float y, float size, u32 color) {
 		}
 	} while (number);
 }
+
+internal void
+draw_option_bars(float x, float y, int setting_value) {
+	draw_rect(x, y, 10, 4, setting_value > 2 ? color_button : color_button_unfocused);
+	draw_rect(x, y - 10, 10, 4, setting_value > 1 ? color_button : color_button_unfocused);
+	draw_rect(x, y - 20, 10, 4, setting_value > 0 ? color_button : color_button_unfocused);
+}
+
+internal void 
+draw_pause_icon() {
+	draw_rect(-4, 0, 2, 6, color_borders);
+	draw_rect(4, 0, 2, 6, color_borders);
+}

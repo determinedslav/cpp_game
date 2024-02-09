@@ -181,18 +181,14 @@ simulate_game(Input* input, float dt) {
 				if (!selected_settings) {
 					draw_rect(-45, -10, 15, 20, color_borders);
 				}
-				draw_rect(-45, 0, 10, 4, difficulty > 2 ? color_button : color_button_unfocused);
-				draw_rect(-45, -10, 10, 4, difficulty > 1 ? color_button : color_button_unfocused);
-				draw_rect(-45, -20, 10, 4, difficulty > 0 ? color_button : color_button_unfocused);
+				draw_option_bars(-45, 0, difficulty);
 			}
 
 			draw_text(text_ball_speed, 27, 18, text_size, color_text);
 			if (selected_settings || !enemy_is_ai) {
 				draw_rect(45, -10, 15, 20, color_borders);
 			}
-			draw_rect(45, 0, 10, 4, ball_speed_modifier > 2 ? color_button : color_button_unfocused);
-			draw_rect(45, -10, 10, 4, ball_speed_modifier > 1 ? color_button : color_button_unfocused);
-			draw_rect(45, -20, 10, 4, ball_speed_modifier > 0 ? color_button : color_button_unfocused);
+			draw_option_bars(45, 0, ball_speed_modifier);
 
 			ball_dp_x = ball_base_speed * ball_speed_modifier;
 		}
@@ -213,8 +209,7 @@ simulate_game(Input* input, float dt) {
 			draw_text(text_2_player, 17, 2, text_size, selected_players ? color_text : color_text_unfocused);
 		}
 	} else {
-		draw_rect(-4, 0, 2, 6, color_borders);
-		draw_rect(4, 0, 2, 6, color_borders);
+		draw_pause_icon();
 
 		if (pressed(BUTTON_P)) {
 			is_paused = !is_paused;
