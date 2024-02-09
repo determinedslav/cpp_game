@@ -16,7 +16,7 @@ enum Gamemode {
 	GM_GAMEPLAY
 };
 
-Gamemode current_gamemode;
+Gamemode current_gamemode = GM_MENU;
 int selected_players;
 int selected_settings;
 bool is_paused = false;
@@ -196,7 +196,7 @@ simulate_game(Input* input, float dt) {
 
 			ball_dp_x = ball_base_speed * ball_speed_modifier;
 		}
-		else {
+		else if (current_gamemode == GM_MENU) {
 			if (pressed(BUTTON_LEFT) || pressed(BUTTON_RIGHT) || pressed(BUTTON_A) || pressed(BUTTON_D)) {
 				selected_players = !selected_players;
 			}
