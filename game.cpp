@@ -59,6 +59,14 @@ aabb_vs_aabb(float p1x, float p1y, float hs1x, float hs1y, float p2x, float p2y,
 }
 
 internal void
+reset_ball() {
+	ball_dp_x *= -1;
+	ball_dp_y = 0;
+	ball_p_x = 0;
+	ball_p_y = 0;
+}
+
+internal void
 reset_game() {
 	current_gamemode = GM_MENU;
 	player_y = player_dp = enemy_y = enemy_dp = 0;
@@ -125,17 +133,11 @@ simulate_game(Input* input, float dt) {
 				}
 
 				if (ball_p_x + ball_half_size > arena_half_size_x) {
-					ball_dp_x *= -1;
-					ball_dp_y = 0;
-					ball_p_x = 0;
-					ball_p_y = 0;
+					reset_ball();
 					enemy_score++;
 				}
 				else if (ball_p_x - ball_half_size < -arena_half_size_x) {
-					ball_dp_x *= -1;
-					ball_dp_y = 0;
-					ball_p_x = 0;
-					ball_p_y = 0;
+					reset_ball();
 					player_score++;
 				}
 			}
