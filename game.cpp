@@ -213,8 +213,8 @@ simulate_game(Input* input, float dt) {
 			draw_text(text_2_player, 17, 2, text_size, selected_players ? color_text : color_text_unfocused);
 		}
 	} else {
-		draw_rect(-4, 0, 2, 6, 0xff5500);
-		draw_rect(4, 0, 2, 6, 0xff5500);
+		draw_rect(-4, 0, 2, 6, color_borders);
+		draw_rect(4, 0, 2, 6, color_borders);
 
 		if (pressed(BUTTON_P)) {
 			is_paused = !is_paused;
