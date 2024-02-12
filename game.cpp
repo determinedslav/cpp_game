@@ -184,6 +184,9 @@ simulate_game(Input* input, float dt) {
 					draw_rect(-45, -10, 15, 20, color_borders);
 				}
 				draw_option_bars(-45, 0, difficulty);
+				//draw_rect(-45, 0, 10, 4, difficulty > 2 ? color_button : color_button_unfocused);
+				//draw_rect(-45, -10, 10, 4, difficulty > 1 ? color_button : color_button_unfocused);
+				//draw_rect(-45, -20, 10, 4, difficulty > 0 ? color_button : color_button_unfocused);
 			}
 
 			draw_text(text_ball_speed, 27, 18, text_size, color_text);
@@ -191,6 +194,9 @@ simulate_game(Input* input, float dt) {
 				draw_rect(45, -10, 15, 20, color_borders);
 			}
 			draw_option_bars(45, 0, ball_speed_modifier);
+			//draw_rect(45, 0, 10, 4, ball_speed_modifier > 2 ? color_button : color_button_unfocused);
+			//draw_rect(45, -10, 10, 4, ball_speed_modifier > 1 ? color_button : color_button_unfocused);
+			//draw_rect(45, -20, 10, 4, ball_speed_modifier > 0 ? color_button : color_button_unfocused);
 
 			ball_dp_x = ball_base_speed * ball_speed_modifier;
 		}
@@ -203,6 +209,10 @@ simulate_game(Input* input, float dt) {
 				current_gamemode = GM_SETTINGS;
 				enemy_is_ai = selected_players ? 0 : 1;
 			}
+
+			//
+			draw_text(text_alphabet, -80, 40, text_size, color_text);
+			//
 
 			draw_rect(-20, 0, 10, 10, selected_players ? color_button_unfocused : color_button);
 			draw_text(text_1_player, -23, 2, text_size, selected_players ? color_text_unfocused : color_text);
