@@ -16,7 +16,7 @@ enum Gamemode {
 	GM_GAMEPLAY
 };
 
-Gamemode current_gamemode;
+Gamemode current_gamemode = GM_MENU;
 int selected_players;
 int selected_settings;
 bool is_paused = false;
@@ -56,6 +56,14 @@ aabb_vs_aabb(float p1x, float p1y, float hs1x, float hs1y, float p2x, float p2y,
 		p1x - hs1x < p2x + hs2x &&
 		p1y + hs1y > p2y - hs2y &&
 		p1y + hs1y < p2y + hs2y);
+}
+
+internal void
+reset_ball() {
+	ball_dp_x *= -1;
+	ball_dp_y = 0;
+	ball_p_x = 0;
+	ball_p_y = 0;
 }
 
 internal void
@@ -125,17 +133,11 @@ simulate_game(Input* input, float dt) {
 				}
 
 				if (ball_p_x + ball_half_size > arena_half_size_x) {
-					ball_dp_x *= -1;
-					ball_dp_y = 0;
-					ball_p_x = 0;
-					ball_p_y = 0;
+					reset_ball();
 					enemy_score++;
 				}
 				else if (ball_p_x - ball_half_size < -arena_half_size_x) {
-					ball_dp_x *= -1;
-					ball_dp_y = 0;
-					ball_p_x = 0;
-					ball_p_y = 0;
+					reset_ball();
 					player_score++;
 				}
 			}
@@ -181,22 +183,18 @@ simulate_game(Input* input, float dt) {
 				if (!selected_settings) {
 					draw_rect(-45, -10, 15, 20, color_borders);
 				}
-				draw_rect(-45, 0, 10, 4, difficulty > 2 ? color_button : color_button_unfocused);
-				draw_rect(-45, -10, 10, 4, difficulty > 1 ? color_button : color_button_unfocused);
-				draw_rect(-45, -20, 10, 4, difficulty > 0 ? color_button : color_button_unfocused);
+				draw_option_bars(-45, 0, difficulty);
 			}
 
 			draw_text(text_ball_speed, 27, 18, text_size, color_text);
 			if (selected_settings || !enemy_is_ai) {
 				draw_rect(45, -10, 15, 20, color_borders);
 			}
-			draw_rect(45, 0, 10, 4, ball_speed_modifier > 2 ? color_button : color_button_unfocused);
-			draw_rect(45, -10, 10, 4, ball_speed_modifier > 1 ? color_button : color_button_unfocused);
-			draw_rect(45, -20, 10, 4, ball_speed_modifier > 0 ? color_button : color_button_unfocused);
+			draw_option_bars(45, 0, ball_speed_modifier);
 
 			ball_dp_x = ball_base_speed * ball_speed_modifier;
 		}
-		else {
+		else if (current_gamemode == GM_MENU) {
 			if (pressed(BUTTON_LEFT) || pressed(BUTTON_RIGHT) || pressed(BUTTON_A) || pressed(BUTTON_D)) {
 				selected_players = !selected_players;
 			}
@@ -213,8 +211,7 @@ simulate_game(Input* input, float dt) {
 			draw_text(text_2_player, 17, 2, text_size, selected_players ? color_text : color_text_unfocused);
 		}
 	} else {
-		draw_rect(-4, 0, 2, 6, 0xff5500);
-		draw_rect(4, 0, 2, 6, 0xff5500);
+		draw_pause_icon();
 
 		if (pressed(BUTTON_P)) {
 			is_paused = !is_paused;
