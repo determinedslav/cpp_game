@@ -155,6 +155,16 @@ draw_option_bars(float x, float y, int setting_value) {
 	draw_rect(x, y - 20, 10, 4, setting_value > 0 ? color_button : color_button_unfocused);
 }
 
+internal void
+draw_exit_menu(float text_size, int setting_value) {
+	draw_rect(0, 0, 19, 11, color_borders);
+	draw_text(text_exit, -8, 7, text_size, color_text);
+	draw_rect(-10, -5, 7, 4, setting_value ? color_button : color_button_unfocused);
+	draw_text(text_yes, -14, -3.5f, text_size * 0.75f, setting_value ? color_text : color_text_unfocused);
+	draw_rect(10, -5, 7, 4, setting_value ? color_button : color_button_unfocused);
+	draw_text(text_no, 8, -3.5f, text_size * 0.75f, setting_value ? color_text : color_text_unfocused);
+}
+
 internal void 
 draw_pause_icon() {
 	draw_rect(-4, 0, 2, 6, color_borders);
