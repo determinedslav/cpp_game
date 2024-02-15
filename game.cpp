@@ -210,15 +210,17 @@ simulate_game(Input* input, float dt) {
 				enemy_is_ai = selected_players ? 0 : 1;
 			}
 
-			//
-			draw_text(text_alphabet, -80, 40, text_size, color_text);
-			//
-
 			draw_rect(-20, 0, 10, 10, selected_players ? color_button_unfocused : color_button);
 			draw_text(text_1_player, -23, 2, text_size, selected_players ? color_text_unfocused : color_text);
 
 			draw_rect(20, 0, 10, 10, selected_players ? color_button : color_button_unfocused);
 			draw_text(text_2_player, 17, 2, text_size, selected_players ? color_text : color_text_unfocused);
+
+			//
+			draw_text(text_alphabet, -80, 40, text_size, color_text);
+
+			draw_exit_menu(text_size, 1);
+			//
 		}
 	} else {
 		draw_pause_icon();
